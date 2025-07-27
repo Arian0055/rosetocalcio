@@ -38,10 +38,19 @@ export default function ContattiPage() {
               <h1 className="text-4xl font-light text-[#1e3c72] mb-12 text-center">Contatti</h1>
 
               <div className="grid lg:grid-cols-2 gap-12">
-                {/* Map Placeholder */}
+                {/* Google Maps */}
                 <div>
-                  <div className="w-full h-96 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-500 text-lg">Map</span>
+                  <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+                    <iframe 
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2933.7948344881984!2d14.019764440341998!3d42.66570291585754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1331968e43111df1%3A0x525fb649634b35e!2sA.S.D.%20Roseto!5e0!3m2!1sit!2sit!4v1753574080217!5m2!1sit!2sit" 
+                      width="100%" 
+                      height="100%" 
+                      style={{border: 0}} 
+                      allowFullScreen={true}
+                      loading="lazy" 
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="A.S.D. Roseto Location"
+                    />
                   </div>
                 </div>
 
@@ -85,40 +94,6 @@ export default function ContattiPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
-
-                  {/* Contact Form */}
-                  <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-6">
-                    <h3 className="text-xl font-light text-[#1e3c72] mb-4">Invia un Messaggio</h3>
-                    <form className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                        <input
-                          type="text"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1e3c72]"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input
-                          type="email"
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1e3c72]"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Messaggio</label>
-                        <textarea
-                          rows={4}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#1e3c72]"
-                        ></textarea>
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full bg-gradient-to-r from-[#1e3c72] to-blue-600 text-white py-2 px-4 rounded-md hover:from-blue-600 hover:to-[#1e3c72] transition-all duration-300"
-                      >
-                        Invia Messaggio
-                      </button>
-                    </form>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 
 const AnimatedSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   return (
@@ -42,8 +43,16 @@ export default function RosetoPage() {
 
               <div className="grid lg:grid-cols-2 gap-8 items-start">
                 <div>
-                  <div className="w-full h-64 bg-gradient-to-br from-blue-200 to-blue-300 rounded-lg flex items-center justify-center mb-6">
-                    <span className="text-blue-800">Roseto Beach</span>
+                  <div className="w-80 h-80 mx-auto bg-white rounded-2xl overflow-hidden shadow-xl">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src="/images/fotoroseto1.jpg"
+                        alt="Roseto Beach"
+                        fill
+                        className="object-cover"
+                        sizes="320px"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -59,14 +68,15 @@ export default function RosetoPage() {
                     controviali alberati, o rinfrancarsi nei diversi giardini pubblici di cui dispone.
                   </p>
 
-                  <div className="bg-gradient-to-r from-blue-50 to-blue-100 border-l-4 border-[#1e3c72] p-4 rounded">
-                    <p className="text-[#1e3c72] font-medium">
-                      {"<<< "}
-                      <Link href="#" className="hover:underline">
-                        Clicca qui per il sito istituzione di ROSETO
-                      </Link>
-                      {" >>>"}
-                    </p>
+                  <div className="text-center">
+                    <Link
+                      href="http://www.comune.roseto.te.it/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block bg-gradient-to-r from-[#1e3c72] to-blue-600 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-[#1e3c72] transition-all duration-300 font-medium"
+                    >
+                      Clicca qui per il sito istituzione di ROSETO
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,9 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
+import { useState } from "react"
+import { X, ChevronLeft, ChevronRight } from "lucide-react"
 
 const AnimatedSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   return (
@@ -18,7 +21,119 @@ const AnimatedSection = ({ children, className = "" }: { children: React.ReactNo
   )
 }
 
+const ImageModal = ({ 
+  isOpen, 
+  onClose, 
+  images, 
+  currentIndex, 
+  onPrevious, 
+  onNext 
+}: {
+  isOpen: boolean
+  onClose: () => void
+  images: string[]
+  currentIndex: number
+  onPrevious: () => void
+  onNext: () => void
+}) => {
+  if (!isOpen) return null
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+      <div className="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center">
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+        >
+          <X size={32} />
+        </button>
+        
+        <button
+          onClick={onPrevious}
+          className="absolute left-4 text-white hover:text-gray-300 z-10"
+        >
+          <ChevronLeft size={32} />
+        </button>
+        
+        <button
+          onClick={onNext}
+          className="absolute right-4 text-white hover:text-gray-300 z-10"
+        >
+          <ChevronRight size={32} />
+        </button>
+        
+        <div className="relative w-full h-full max-w-3xl max-h-[80vh]">
+          <Image
+            src={images[currentIndex]}
+            alt={`Tournament photo ${currentIndex + 1}`}
+            fill
+            className="object-contain"
+            sizes="90vw"
+          />
+        </div>
+        
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white text-sm">
+          {currentIndex + 1} / {images.length}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function IlTorneoPage() {
+  const images = [
+    "/images/TORNEO-2017-e1492799561833.jpg",
+    "/images/copertina-2016.jpg",
+    "/images/copertina-2015.jpg",
+    "/images/2014_18.jpg",
+    "/images/TORNEO14A-744x1024.jpg",
+    "/images/TORNEO14B-744x1024.jpg",
+    "/images/fronte_2013.jpg",
+    "/images/retro_2013.jpg",
+    "/images/fronte_2012.jpg",
+    "/images/retro_2012.jpg",
+    "/images/TORNEO12A-722x1024.jpg",
+    "/images/TORNEO12B-718x1024.jpg",
+    "/images/TORNEO11A-744x1024.jpg",
+    "/images/TORNEO11B-744x1024.jpg",
+    "/images/TORNEO10A-737x1024.jpg",
+    "/images/TORNEO10B-722x1024.jpg",
+    "/images/TORNEO9A.jpg",
+    "/images/TORNEO7A-732x1024.jpg",
+    "/images/TORNEO7B-731x1024.jpg",
+    "/images/TORNEO6A-723x1024.jpg",
+    "/images/TORNEO6B-726x1024.jpg",
+    "/images/TORNEO5A-702x1024.jpg",
+    "/images/TORNEO5B-739x1024.jpg",
+    "/images/TORNEO4A.jpg",
+    "/images/TORNEO3A-718x1024.jpg",
+    "/images/TORNEO3B-717x1024.jpg",
+    "/images/TORNEO2A-725x1024.jpg",
+    "/images/TORNEO2B-725x1024.jpg",
+    "/images/scansione0024-744x1024.jpg",
+    "/images/scansione00251-744x1024.jpg"
+  ]
+
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  const openModal = (index: number) => {
+    setCurrentImageIndex(index)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+  }
+
+  const goToPrevious = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1))
+  }
+
+  const goToNext = () => {
+    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1))
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <div className="pt-24 px-4 py-8">
@@ -38,9 +153,30 @@ export default function IlTorneoPage() {
 
               <div className="grid lg:grid-cols-2 gap-12 mb-12">
                 <div>
-                  <div className="w-full h-64 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center mb-6">
-                    <span className="text-gray-500">Stadium Image</span>
+                  <h3 className="text-lg font-medium text-[#1e3c72] mb-4">La Storia</h3>
+                  <div className="grid grid-cols-4 gap-1 max-w-md">
+                    {images.slice(0, 8).map((image, index) => (
+                      <div 
+                        key={index} 
+                        className="aspect-square bg-gray-100 rounded overflow-hidden relative group cursor-pointer hover:opacity-80 transition-opacity"
+                        onClick={() => openModal(index)}
+                      >
+                        <Image
+                          src={image}
+                          alt={`Tournament photo ${index + 1}`}
+                          fill
+                          className="object-cover"
+                          sizes="80px"
+                        />
+                      </div>
+                    ))}
                   </div>
+                  <button 
+                    onClick={() => openModal(0)}
+                    className="mt-2 text-sm text-[#1e3c72] hover:underline"
+                  >
+                    Vedi tutto ({images.length})
+                  </button>
                 </div>
 
                 <div>
@@ -100,11 +236,22 @@ export default function IlTorneoPage() {
                 </p>
 
                 <div className="grid md:grid-cols-3 gap-6">
-                  {["Award 1", "Award 2", "Award 3"].map((award, index) => (
-                    <div key={award} className="text-center">
-                      <div className="w-full h-48 bg-gradient-to-br from-gray-200 to-gray-300 rounded-lg flex items-center justify-center mb-4">
-                        <span className="text-gray-500">{award}</span>
+                  {[
+                    { title: "Rosa d’oro opera dello scultore rosetano Luciano Astolfi,premio Torneo Internazionale.", image: "/images/coppa1.png" },
+                    { title: "Coppa d’argento del “Presidente della Repubblica” al torneo Spiagge d’Abruzzo Cup ", image: "/images/coppa21.png" },
+                    { title: "Diploma di merito della F.I.G.C. per migliore scuola calcio stagione 2000/2001", image: "/images/coppa3.png" }
+                  ].map((award) => (
+                    <div key={award.title} className="text-center">
+                      <div className="w-full h-72 bg-white rounded-lg overflow-hidden shadow-lg mb-4 relative">
+                        <Image
+                          src={award.image}
+                          alt={award.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                        />
                       </div>
+                      <h3 className="text-sm font-medium text-[#1e3c72] mt-2">{award.title}</h3>
                     </div>
                   ))}
                 </div>
@@ -113,6 +260,15 @@ export default function IlTorneoPage() {
           </AnimatedSection>
         </div>
       </div>
+
+      <ImageModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        images={images}
+        currentIndex={currentImageIndex}
+        onPrevious={goToPrevious}
+        onNext={goToNext}
+      />
     </div>
   )
 }

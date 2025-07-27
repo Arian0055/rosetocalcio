@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import Image from "next/image" // ✅ Add this line
-import logo from "../public/images/Logo .png"
+import logo from "../public/images/Logo.png"
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -15,7 +15,6 @@ export default function Navigation() {
     { name: "HOME", href: "/" },
     { name: "LA SOCIETÀ", href: "/la-societa" },
     { name: "IL TORNEO", href: "/il-torneo" },
-    { name: "LA STORIA", href: "/la-storia" },
     { name: "CONTATTI", href: "/contatti" },
     { name: "SPECIALE", href: "/speciale" },
     { name: "ROSETO", href: "/roseto" },

@@ -4,6 +4,7 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Image from "next/image"
 
 const AnimatedSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   return (
@@ -38,8 +39,16 @@ export default function LaSocietaPage() {
 
               <div className="grid md:grid-cols-3 gap-8 mb-12">
                 <div className="md:col-span-1 text-center">
-                  <div className="w-24 h-24 bg-gradient-to-br from-[#1e3c72] to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white font-bold text-2xl">RC</span>
+                  <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center mx-auto mb-4 p-2 shadow-lg">
+                    <div className="relative w-full h-full">
+                      <Image
+                        src="/images/Logo.png"
+                        alt="Roseto Calcio Logo"
+                        fill
+                        className="object-contain"
+                        sizes="96px"
+                      />
+                    </div>
                   </div>
                 </div>
 
@@ -62,11 +71,24 @@ export default function LaSocietaPage() {
                 </div>
               </div>
 
+              {/* Team Photo Section */}
+              <div className="mb-12">
+                <div className="w-full max-w-4xl mx-auto h-96 bg-white rounded-lg overflow-hidden shadow-lg relative">
+                  <Image
+                    src="/images/organico_scuola_calcio.jpeg"
+                    alt="Organico Scuola Calcio ASD Roseto"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                  />
+                </div>
+              </div>
+
               {/* Staff Section */}
               <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-lg p-8">
                 <h2 className="text-2xl font-light text-[#1e3c72] mb-8 text-center">Staff Tecnico</h2>
 
-                <div className="grid md:grid-cols-2 gap-8 text-sm">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-sm">
                   <div>
                     <h3 className="font-semibold text-[#1e3c72] mb-3">DIRIGENZA</h3>
                     <ul className="space-y-1 text-gray-600">
@@ -74,14 +96,60 @@ export default function LaSocietaPage() {
                       <li>Vice-Presidente: REPETTO MASSIMO</li>
                       <li>Segretario: FERRETTI GIUSEPPE</li>
                     </ul>
+
+                    <h3 className="font-semibold text-[#1e3c72] mb-3 mt-6">CONSIGLIERI</h3>
+                    <ul className="space-y-1 text-gray-600">
+                      <li>MARCELLI GIUSEPPE</li>
+                      <li>CARLO PAVONE</li>
+                      <li>DE SANTE GUERINO</li>
+                      <li>NICOLA LEGGE</li>
+                    </ul>
+
+                    <h3 className="font-semibold text-[#1e3c72] mb-3 mt-6">DIRIGENTI UFFICIALI</h3>
+                    <ul className="space-y-1 text-gray-600">
+                      <li>ADRIANO RECANATINI</li>
+                      <li>ARRIGHETTI SANDRO</li>
+                      <li>DE CARLO ANDREA</li>
+                    </ul>
                   </div>
 
                   <div>
-                    <h3 className="font-semibold text-[#1e3c72] mb-3">STAFF TECNICO</h3>
+                    <h3 className="font-semibold text-[#1e3c72] mb-3">TECNICI</h3>
                     <ul className="space-y-1 text-gray-600">
                       <li>MARINI IRMO - Responsabile attività di base</li>
                       <li>DI NICOLANTONIO LUIGI - Responsabile agonistica</li>
-                      <li>MATTIOLI ROSA - Coordinatrice Torneo</li>
+                      <li>DI NICOLANTONIO LUIGI - Direttore Tecnico squadra Allievi</li>
+                      <li>TALAMONTI FRANCO - Allenatore squadra Allievi Provinciali</li>
+                      <li>DI MARTINO FABRIZIO - Direttore Tecnico squadra Giovanissimi</li>
+                      <li>DE SIMONE RODOLFO - Allenatore squadra Giovanissimi</li>
+                      <li>MARINI GIANLUIGI - Allenatore degli esordienti</li>
+                      <li>MARINI GIANMARIO - Allenatore degli esordienti</li>
+                    </ul>
+
+                    <h3 className="font-semibold text-[#1e3c72] mb-3 mt-6">ALLENATORI PORTIERI</h3>
+                    <ul className="space-y-1 text-gray-600">
+                      <li>CHRISTIAN DE SCHRYVER</li>
+                      <li>FABIO CERASI</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h3 className="font-semibold text-[#1e3c72] mb-3">ISTRUTTORI SCUOLA CALCIO</h3>
+                    <ul className="space-y-1 text-gray-600">
+                      <li>PAGLIAROLI LUANA</li>
+                      <li>NARDINOCCHI BARBARA</li>
+                      <li>CIRIOLO MARCO</li>
+                      <li>BONADUCE MARCO</li>
+                      <li>RECINELLA GIANLUCA</li>
+                    </ul>
+
+                    <h3 className="font-semibold text-[#1e3c72] mb-3 mt-6">ALTRI RUOLI</h3>
+                    <ul className="space-y-1 text-gray-600">
+                      <li>MATTIOLI ROSA - Coordinatrice Coppa Spiagge d'Abruzzo</li>
+                      <li>PIETRINFERNI VIRGINIA - Magazziniere</li>
+                      <li>DE CARLO ANDREA - Custode</li>
+                      <li>MARILENA PALUMBI - Consulente Marketing</li>
+                      <li>MAIORANI GIANNI - Consulente Informatico</li>
                     </ul>
                   </div>
                 </div>

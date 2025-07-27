@@ -6,6 +6,7 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Link } from "lucide-react"
+import Image from "next/image"
 
 const AnimatedSection = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
   const ref = useRef(null)
@@ -138,8 +139,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500">Tournament Image</span>
+              <div className="w-full h-80 bg-gray-200 rounded-lg overflow-hidden relative">
+                <Image
+                  src="/images/logo_torneo.png"
+                  alt="Spiagge d'Abruzzo Cup Tournament Poster"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
           </div>
@@ -153,17 +160,29 @@ export default function HomePage() {
             <h2 className="text-3xl font-light text-white mb-4">Partnership</h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
-            {["Roseto Calcio", "Nike Football", "Team Wear"].map((sponsor, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {[
+              { name: "Roseto Calcio", image: "/images/Logo.png" },
+              { name: "Nike Football", image: "/images/nike_football_logo.png" },
+              { name: "Team Wear", image: "/images/GGTeamwear_logo_originale.png" },
+            ].map((sponsor, index) => (
               <motion.div
-                key={sponsor}
+                key={sponsor.name}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex items-center justify-center h-24 border border-white/20"
+                className="bg-white/10 backdrop-blur-sm rounded-lg p-6 flex items-center justify-center h-32 border border-white/20"
               >
-                <span className="text-white font-medium text-sm">{sponsor}</span>
+                <div className="relative w-full h-full">
+                  <Image
+                    src={sponsor.image}
+                    alt={`${sponsor.name} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 768px) 50vw, 33vw"
+                  />
+                </div>
               </motion.div>
             ))}
           </div>
@@ -175,8 +194,16 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-3 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-[#1e3c72] to-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white font-bold text-xs">RC</span>
+              <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center p-1">
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/images/Logo.png"
+                    alt="Roseto Calcio Logo"
+                    fill
+                    className="object-contain"
+                    sizes="32px"
+                  />
+                </div>
               </div>
               <span className="text-lg font-medium">ASD Roseto Calcio</span>
             </div>
